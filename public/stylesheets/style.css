@@ -1,0 +1,51 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#chatbox {
+  border: 1px solid black;
+  width:700px;
+  height:300px;
+  padding:10px;
+}
+
+#chatbox li {
+  list-style:none;
+}
+
+#chatinput {
+  width:718px;
+}
+
+.hidden {
+  display:none;
+}
+
+#namebox {
+  z-index:100;
+  left:50%;
+  top:50%;
+  margin-left:-350px;
+  margin-top:-50px;
+  height:100px;
+  width:700px;
+  padding:20px;
+  position:absolute;
+  background-color:#ccc;
+}
+
+#dampener {
+  position:fixed;
+  left:0;
+  top:0;
+  height:100%;
+  width:100%;
+  z-index:99;
+  background-color:black;
+  opacity:0.7;
+}
