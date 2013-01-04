@@ -26,20 +26,7 @@ a {
   display:none;
 }
 
-#namebox {
-  z-index:100;
-  left:50%;
-  top:50%;
-  margin-left:-350px;
-  margin-top:-50px;
-  height:100px;
-  width:700px;
-  padding:20px;
-  position:absolute;
-  background-color:#ccc;
-}
-
-#dampener {
+/*#dampener {
   position:fixed;
   left:0;
   top:0;
@@ -48,4 +35,4 @@ a {
   z-index:99;
   background-color:black;
   opacity:0.7;
-}
+}*/
