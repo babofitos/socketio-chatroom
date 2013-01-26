@@ -1,12 +1,13 @@
 var socket = io.connect(window.location.href)
 
-socket.on('connect', function() {
-  socket.emit('adduser', prompt("What's your name?"), function() {
-  })
+socket.on('connect', function (data) {
+  socket.emit('adduser', prompt("What's your name?"))
+  socket.emit('entrance')
 })
 
 socket.on('entrance', function (data) {
-  createMessage('entrance', data.message)
+  console.log('hit')
+  createMessage('entrance', data)
 })
 
 socket.on('exit', function (data) {
@@ -14,7 +15,7 @@ socket.on('exit', function (data) {
 })
 
 socket.on('chat', function (data) {
-  createMessage('chat', data.message)
+  createMessage('chat', data)
 })
 
 

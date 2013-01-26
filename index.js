@@ -2,7 +2,6 @@ var express = require('express')
   , app = express()
   , server = require('http').createServer(app)
   , io = require('socket.io').listen(server)
-  , usernames = {}
 
 server.listen(process.env.PORT || 1337)
 
@@ -19,36 +18,25 @@ app.get('/', function(req, res) {
   res.render('index')
 })
 
-// app.post('/', function(req, res) {
-//   var chatName = req.body.name
-//   res.send(200)
-//   setChat(chatName)
-// })
-
 io.sockets.on('connection', function(socket) {
   socket.on('adduser', function(username) {
-    socket.username = username
-    usernames[username] = username
+    socket.set('nickname', username)
   })
 
-  io.sockets.emit('entrance', {message: 'A new chatter is online.'})
-
+  socket.on('entrance', function(data) {
+    //send msg to everyone except for sender
+    socket.broadcast.emit('entrance', 'A new chatter is online.')
+  })
+  
   socket.on('disconnect', function() {
     io.sockets.emit('exit', {message: 'A chatter disconnected.'})
   })
   
   socket.on('chat', function(data) {
-    io.sockets.emit('chat', {message:usernames[socket.username]+': ' + data.message})
+    socket.get('nickname', function(err, name) {
+      socket.emit('chat', name+ ': ' + data.message)
+      socket.broadcast.emit('chat', name + ': ' + data.message)
+    })
   })
 })
 
-// function setChat(chatName) {
-//   io.sockets.on('connection', function(socket) {
-//     console.log('hit')
-//     if (!usernames[socket.id]) usernames[socket.id] = chatName
-//     socket.on('chat', function(data) {
-//       io.sockets.emit('chat', {message:usernames[socket.id]+': ' + data.message})
-//     })
-//   })
-//   console.log(usernames)
-// }
